@@ -1,0 +1,243 @@
+import '../../models/book.dart';
+import '../../models/transaction.dart';
+import '../../models/transaction_item.dart';
+import '../../models/user.dart';
+
+/// Seed data lokal untuk Toko Buku Novel.
+/// Data ini berada di memori — bukan dari Firebase.
+/// Saat migrasi, data ini dipindahkan ke Firestore sebagai initial data.
+
+final List<User> mockUsers = [
+  User(
+    id: 'U001',
+    nama: 'Annisa',
+    email: 'annisa@toko.com',
+    password: '123456',
+    peran: 'pemilik',
+  ),
+  User(
+    id: 'U002',
+    nama: 'Pegawai Toko',
+    email: 'pegawai@toko.com',
+    password: '123456',
+    peran: 'pegawai',
+  ),
+];
+
+final List<String> mockCategories = [
+  'Fiksi',
+  'Romansa',
+  'Mystery',
+  'Fantasi',
+  'Sejarah',
+  'Anak',
+];
+
+final List<Book> mockBooks = [
+  Book(
+    id: 'B001',
+    judul: 'Bumi Manusia',
+    penulis: 'Pramoedya Ananta Toer',
+    kategori: 'Sejarah',
+    harga: 85000,
+    stok: 12,
+    sampul: '',
+    deskripsi: 'Novel pertama tetralogi Buru yang menceritakan kebangkitan nasional Indonesia melalui tokoh Minke.',
+  ),
+  Book(
+    id: 'B002',
+    judul: 'Laskar Pelangi',
+    penulis: 'Andrea Hirata',
+    kategori: 'Fiksi',
+    harga: 65000,
+    stok: 8,
+    sampul: '',
+    deskripsi: 'Kisah inspiratif anak Belitung yang berjuang meraih pendidikan di tengah keterbatasan.',
+  ),
+  Book(
+    id: 'B003',
+    judul: 'Negeri 5 Menara',
+    penulis: 'Ahmad Fuadi',
+    kategori: 'Fiksi',
+    harga: 72000,
+    stok: 5,
+    sampul: '',
+    deskripsi: 'Perjalanan Alif dari kampung menuju pesantren modern, mengejar mimpi meraih dunia.',
+  ),
+  Book(
+    id: 'B004',
+    judul: 'Dilan 1990',
+    penulis: 'Pidi Baiq',
+    kategori: 'Romansa',
+    harga: 58000,
+    stok: 15,
+    sampul: '',
+    deskripsi: 'Kisah cinta Dilan dan Milea di Bandung tahun 1990 yang penuh romansa dan humor.',
+  ),
+  Book(
+    id: 'B005',
+    judul: 'Surat Kecil untuk Tuhan',
+    penulis: 'Agnes Davonar',
+    kategori: 'Romansa',
+    harga: 55000,
+    stok: 3,
+    sampul: '',
+    deskripsi: 'Kisah cinta yang penuh air mata dan keikhlasan, tentang Gita dan sahabat-sahabatnya.',
+  ),
+  Book(
+    id: 'B006',
+    judul: 'Filosofi Kopi',
+    penulis: 'Dee Lestari',
+    kategori: 'Fiksi',
+    harga: 62000,
+    stok: 0,
+    sampul: '',
+    deskripsi: 'Kumpulan cerpen tentang kehidupan, cinta, dan filosofi yang disampaikan lewat secangkir kopi.',
+  ),
+  Book(
+    id: 'B007',
+    judul: 'Cantik Itu Luka',
+    penulis: 'Eka Kurniawan',
+    kategori: 'Sejarah',
+    harga: 95000,
+    stok: 7,
+    sampul: '',
+    deskripsi: 'Saga keluarga yang merangkum sejarah Indonesia dari kolonial hingga Orde Baru.',
+  ),
+  Book(
+    id: 'B008',
+    judul: 'Pulang',
+    penulis: 'Leila S. Chudori',
+    kategori: 'Sejarah',
+    harga: 78000,
+    stok: 10,
+    sampul: '',
+    deskripsi: 'Kisah eksil politik 1965 yang tidak bisa pulang ke tanah air selama puluhan tahun.',
+  ),
+  Book(
+    id: 'B009',
+    judul: 'Bumi',
+    penulis: 'Tere Liye',
+    kategori: 'Fantasi',
+    harga: 68000,
+    stok: 20,
+    sampul: '',
+    deskripsi: 'Petualangan Raib dan sahabatnya menjelajahi dunia lain yang penuh keajaiban.',
+  ),
+  Book(
+    id: 'B010',
+    judul: 'Laut Bercerita',
+    penulis: 'Leila S. Chudori',
+    kategori: 'Fiksi',
+    harga: 75000,
+    stok: 9,
+    sampul: '',
+    deskripsi: 'Kisah dibalik hilangnya aktivis 1998, diceritakan dari sudut pandang keluarga yang ditinggalkan.',
+  ),
+  Book(
+    id: 'B011',
+    judul: 'Ronggeng Dukuh Paruk',
+    penulis: 'Ahmad Tohari',
+    kategori: 'Sejarah',
+    harga: 82000,
+    stok: 4,
+    sampul: '',
+    deskripsi: 'Kisah Srintil, ronggeng dari dusun Paruk yang terjebak dalam pusaran politik 1965.',
+  ),
+  Book(
+    id: 'B012',
+    judul: 'Aroma Karsa',
+    penulis: 'Dee Lestari',
+    kategori: 'Fantasi',
+    harga: 70000,
+    stok: 6,
+    sampul: '',
+    deskripsi: 'Cerita tentang Landung dan Jati yang terhubung lewat indra penciuman dan karsa.',
+  ),
+  Book(
+    id: 'B013',
+    judul: 'Petualangan Sherina',
+    penulis: 'Jujur Prananto',
+    kategori: 'Anak',
+    harga: 45000,
+    stok: 18,
+    sampul: '',
+    deskripsi: 'Petualangan seru Sherina di Bandung yang penuh teka-teki dan persahabatan.',
+  ),
+  Book(
+    id: 'B014',
+    judul: 'Mata Najwa',
+    penulis: 'Najwa Shihab',
+    kategori: 'Fiksi',
+    harga: 88000,
+    stok: 2,
+    sampul: '',
+    deskripsi: 'Kumpulan wawancara mendalam dengan tokoh-tokoh penting Indonesia.',
+  ),
+  Book(
+    id: 'B015',
+    judul: 'Hujan',
+    penulis: 'Tere Liye',
+    kategori: 'Fiksi',
+    harga: 67000,
+    stok: 11,
+    sampul: '',
+    deskripsi: 'Cerita tentang Lail dan esai-esai yang menyimpan rahasia masa depan.',
+  ),
+];
+
+final List<Transaction> mockTransactions = [
+  Transaction(
+    id: 'TRX001',
+    items: [
+      TransactionItem(bookId: 'B001', judul: 'Bumi Manusia', qty: 2, harga: 85000),
+      TransactionItem(bookId: 'B004', judul: 'Dilan 1990', qty: 1, harga: 58000),
+    ],
+    total: 228000,
+    tanggal: DateTime(2026, 10, 20),
+    status: 'selesai',
+    userId: 'U001',
+  ),
+  Transaction(
+    id: 'TRX002',
+    items: [
+      TransactionItem(bookId: 'B002', judul: 'Laskar Pelangi', qty: 3, harga: 65000),
+    ],
+    total: 195000,
+    tanggal: DateTime(2026, 10, 22),
+    status: 'selesai',
+    userId: 'U002',
+  ),
+  Transaction(
+    id: 'TRX003',
+    items: [
+      TransactionItem(bookId: 'B009', judul: 'Bumi', qty: 2, harga: 68000),
+      TransactionItem(bookId: 'B015', judul: 'Hujan', qty: 1, harga: 67000),
+    ],
+    total: 203000,
+    tanggal: DateTime(2026, 10, 24),
+    status: 'selesai',
+    userId: 'U001',
+  ),
+  Transaction(
+    id: 'TRX004',
+    items: [
+      TransactionItem(bookId: 'B003', judul: 'Negeri 5 Menara', qty: 1, harga: 72000),
+    ],
+    total: 72000,
+    tanggal: DateTime(2026, 10, 25),
+    status: 'selesai',
+    userId: 'U002',
+  ),
+  Transaction(
+    id: 'TRX005',
+    items: [
+      TransactionItem(bookId: 'B010', judul: 'Laut Bercerita', qty: 2, harga: 75000),
+      TransactionItem(bookId: 'B013', judul: 'Petualangan Sherina', qty: 1, harga: 45000),
+    ],
+    total: 195000,
+    tanggal: DateTime(2026, 10, 26),
+    status: 'selesai',
+    userId: 'U001',
+  ),
+];
