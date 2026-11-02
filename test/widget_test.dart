@@ -1,30 +1,86 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:tokobukunovel/main.dart';
+import 'package:provider/provider.dart';
+import 'package:tokobukunovel/app.dart';
+import 'package:tokobukunovel/providers/auth_provider.dart';
+import 'package:tokobukunovel/providers/book_provider.dart';
+import 'package:tokobukunovel/providers/report_provider.dart';
+import 'package:tokobukunovel/providers/transaction_provider.dart';
+import 'package:tokobukunovel/repositories/local/local_auth_repository.dart';
+import 'package:tokobukunovel/repositories/local/local_book_repository.dart';
+import 'package:tokobukunovel/repositories/local/local_transaction_repository.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Aplikasi menampilkan halaman login saat pertama dibuka',
+      (WidgetTester tester) async {
+    final authRepo = LocalAuthRepository();
+    final bookRepo = LocalBookRepository();
+    final txRepo = LocalTransactionRepository();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => AuthProvider(authRepo)),
+          ChangeNotifierProvider(create: (_) => BookProvider(bookRepo)),
+          ChangeNotifierProvider(
+              create: (_) => TransactionProvider(txRepo, bookRepo)),
+          ChangeNotifierProvider(create: (_) => ReportProvider(txRepo)),
+        ],
+        child: const TokoBukuNovelApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Halaman login harus menampilkan teks "Masuk"
+    expect(find.text('Masuk'), findsWidgets);
+    // Field email dan password = 2 TextField
+    expect(find.byType(TextField), findsNWidgets(2));
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('Halaman login memiliki demo account hint', (tester) async {
+    final authRepo = LocalAuthRepository();
+    final bookRepo = LocalBookRepository();
+    final txRepo = LocalTransactionRepository();
+
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => AuthProvider(authRepo)),
+          ChangeNotifierProvider(create: (_) => BookProvider(bookRepo)),
+          ChangeNotifierProvider(
+              create: (_) => TransactionProvider(txRepo, bookRepo)),
+          ChangeNotifierProvider(create: (_) => ReportProvider(txRepo)),
+        ],
+        child: const TokoBukuNovelApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // Akun demo harus terlihat sebagai hint
+    expect(find.textContaining('annisa@toko.com'), findsOneWidget);
+    expect(find.textContaining('pegawai@toko.com'), findsOneWidget);
+  });
+
+  testWidgets('Tombol Masuk dapat ditekan', (tester) async {
+    final authRepo = LocalAuthRepository();
+    final bookRepo = LocalBookRepository();
+    final txRepo = LocalTransactionRepository();
+
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => AuthProvider(authRepo)),
+          ChangeNotifierProvider(create: (_) => BookProvider(bookRepo)),
+          ChangeNotifierProvider(
+              create: (_) => TransactionProvider(txRepo, bookRepo)),
+          ChangeNotifierProvider(create: (_) => ReportProvider(txRepo)),
+        ],
+        child: const TokoBukuNovelApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final button = find.widgetWithText(ElevatedButton, 'Masuk');
+    expect(button, findsOneWidget);
   });
 }
