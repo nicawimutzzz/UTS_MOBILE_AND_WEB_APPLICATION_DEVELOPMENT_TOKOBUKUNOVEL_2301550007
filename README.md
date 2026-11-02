@@ -13,7 +13,9 @@ Aplikasi toko buku novel dengan fitur manajemen katalog, transaksi penjualan, da
 
 ## Tautan
 
+- **Repository GitHub**: [UTS_MOBILE_AND_WEB_APPLICATION_DEVELOPMENT_TOKOBUKUNOVEL_2301550007](https://github.com/nicawimutzzz/UTS_MOBILE_AND_WEB_APPLICATION_DEVELOPMENT_TOKOBUKUNOVEL_2301550007)
 - **Desain Figma (Wireframe Minggu 4)**: [TokoBukuNovel – Wireframe](https://www.figma.com/design/MyIaaWgf0s38K0u3TrqRdP/-2301550007--%E2%80%93--TokoBukuNovel--%E2%80%93--Wireframe)
+- **Proposal UTS**: [docs/Proposal_UTS_Annisa_Asti_Indriyani.docx](docs/Proposal_UTS_Annisa_Asti_Indriyani.docx)
 
 ## Deskripsi Singkat
 
@@ -56,3 +58,26 @@ lib/
 ```
 
 **Catatan arsitektur**: local-first dengan Repository Pattern. Data saat ini disimpan di memori (mock data); koneksi Firebase akan ditambahkan pada fase berikutnya tanpa mengubah UI.
+
+## Dokumen UTS
+
+| Dokumen | Lokasi |
+|---------|--------|
+| Proposal UTS (DOCX) | `docs/Proposal_UTS_Annisa_Asti_Indriyani.docx` |
+| Proposal UTS (Markdown) | `docs/Proposal_UTS_Annisa_Asti_Indriyani.md` |
+| Rencana Video Remotion | `docs/Rencana_Video_Remotion_UTS.md` |
+| Skrip Video Presentasi | `docs/Skrip_Video_UTS_Annisa_Asti_Indriyani.md` |
+
+## Video Presentasi UTS
+
+Video dibuat menggunakan Remotion (React video framework) + edge-tts (TTS gratis Bahasa Indonesia).
+
+```bash
+cd video-uts
+npm install
+npm run dev      # preview di Remotion Studio
+npm run render   # render ke out/uts-tokobukunovel.mp4
+```
+
+**Voice**: id-ID-GadisNeural (Microsoft Edge TTS)
+**Durasi**: ~6.5 menit | **Resolusi**: 720p | **7 scene**

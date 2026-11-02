@@ -1,0 +1,30 @@
+{
+  "scene01": {
+    "title": "Pembuka",
+    "file": "audio/scene01.mp3"
+  },
+  "scene02": {
+    "title": "Masalah",
+    "file": "audio/scene02.mp3"
+  },
+  "scene03": {
+    "title": "Target dan Pengguna",
+    "file": "audio/scene03.mp3"
+  },
+  "scene04": {
+    "title": "Scope dan Prioritas",
+    "file": "audio/scene04.mp3"
+  },
+  "scene05": {
+    "title": "Rancangan",
+    "file": "audio/scene05.mp3"
+  },
+  "scene06": {
+    "title": "Demo Prototype",
+    "file": "audio/scene06.mp3"
+  },
+  "scene07": {
+    "title": "Penutup",
+    "file": "audio/scene07.mp3"
+  }
+}

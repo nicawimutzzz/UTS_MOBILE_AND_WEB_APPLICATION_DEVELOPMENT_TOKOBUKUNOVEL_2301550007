@@ -1,0 +1,30 @@
+{
+  "scene01": {
+    "duration_sec": 32.5,
+    "duration_frames": 975
+  },
+  "scene02": {
+    "duration_sec": 46.2,
+    "duration_frames": 1386
+  },
+  "scene03": {
+    "duration_sec": 55.0,
+    "duration_frames": 1650
+  },
+  "scene04": {
+    "duration_sec": 63.5,
+    "duration_frames": 1905
+  },
+  "scene05": {
+    "duration_sec": 82.2,
+    "duration_frames": 2466
+  },
+  "scene06": {
+    "duration_sec": 65.4,
+    "duration_frames": 1962
+  },
+  "scene07": {
+    "duration_sec": 36.5,
+    "duration_frames": 1095
+  }
+}

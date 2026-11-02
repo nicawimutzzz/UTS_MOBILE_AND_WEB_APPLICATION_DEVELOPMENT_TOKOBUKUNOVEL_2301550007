@@ -17,3 +17,9 @@ build/
 # Generated files
 .flutter-plugins
 .flutter-plugins-dependencies
+
+# Remotion / Node.js (video-uts)
+video-uts/node_modules/
+video-uts/out/*.mp4
+video-uts/.remotion/
+video-uts/public/audio/*.mp3
