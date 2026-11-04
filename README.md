@@ -2,8 +2,6 @@
 
 Aplikasi toko buku novel dengan fitur manajemen katalog, transaksi penjualan, dan laporan. Proyek individu MK Mobile and Web Application Development.
 
-![Screenshot Beranda](docs/screenshot-beranda.png)
-
 ## Identitas
 
 - **Nama**: Annisa Asti Indriyani
@@ -41,6 +39,12 @@ cd tokobukunovel
 flutter pub get
 flutter run -d chrome   # atau: flutter run (untuk device lain)
 ```
+
+## Screenshot
+
+![Screenshot Beranda Aplikasi](docs/screenshot-beranda.png)
+
+*Halaman beranda aplikasi TokoBukuNovel menampilkan dashboard ringkasan penjualan, katalog buku, dan navigasi bottom bar.*
 
 ## Struktur Project
 
@@ -81,3 +85,16 @@ npm run render   # render ke out/uts-tokobukunovel.mp4
 
 **Voice**: id-ID-GadisNeural (Microsoft Edge TTS)
 **Durasi**: ~6.5 menit | **Resolusi**: 720p | **7 scene**
+
+## Riwayat Commit
+
+| # | Commit | Tanggal | Pesan |
+|---|--------|---------|-------|
+| 1 | `b28f148` | 26 Okt 2026 | Inisialisasi project Flutter TokoBukuNovel |
+| 2 | `9cbadf4` | 26 Okt 2026 | Tambah README dan screenshot |
+| 3 | `fd04d4a` | 2 Nov 2026 | Perbaiki widget test: ganti test bawaan template dengan test halaman login |
+| 4 | `dd25263` | 2 Nov 2026 | Initial commit (merge remote) |
+| 5 | `b5b15a7` | 2 Nov 2026 | UTS: Tambah proposal, video Remotion + TTS, dan perbarui README |
+| 6 | `31ed940` | 2 Nov 2026 | Merge remote README, keep local version |
+
+Riwayat commit bertahap dari minggu 5 (26 Okt) hingga minggu UTS (2 Nov), mencakup inisialisasi project, penambahan dokumentasi, perbaikan test, dan submission UTS.
