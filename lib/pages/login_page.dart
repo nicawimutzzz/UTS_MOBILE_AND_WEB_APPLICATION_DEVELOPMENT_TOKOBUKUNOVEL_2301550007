@@ -16,8 +16,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController(text: 'annisa@toko.com');
-  final _passwordController = TextEditingController(text: '123456');
+  // Minggu 9: tidak ada lagi kredensial bawaan. Gunakan akun simulasi
+  // yang dibuat lewat Firebase Authentication (jangan pakai password asli).
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
   @override
@@ -141,14 +143,20 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      // Tombol Masuk
-                      auth.status == AuthStatus.loading
-                          ? const CircularProgressIndicator()
-                          : ElevatedButton(
-                              style: AppButtonStyles.primary,
-                              onPressed: _handleLogin,
-                              child: const Text('Masuk'),
-                            ),
+                      // Tombol Masuk: DINONAKTIFKAN selama proses (Latihan 2)
+                      ElevatedButton(
+                        style: AppButtonStyles.primary,
+                        onPressed: auth.status == AuthStatus.loading
+                            ? null
+                            : _handleLogin,
+                        child: auth.status == AuthStatus.loading
+                            ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(strokeWidth: 2),
+                              )
+                            : const Text('Masuk'),
+                      ),
                       const SizedBox(height: 16),
                       // Tautan Daftar
                       Row(
@@ -183,12 +191,19 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           children: [
                             Text(
-                              'Akun demo:',
+                              'Akun simulasi',
                               style: AppTextStyles.caption.copyWith(fontWeight: FontWeight.w600),
                             ),
                             const SizedBox(height: 4),
-                            Text('annisa@toko.com / 123456 (Pemilik)', style: AppTextStyles.caption),
-                            Text('pegawai@toko.com / 123456 (Pegawai)', style: AppTextStyles.caption),
+                            Text(
+                              'Gunakan email & password simulasi, bukan password asli.',
+                              style: AppTextStyles.caption,
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              'Belum punya akun? Tekan Daftar.',
+                              style: AppTextStyles.caption,
+                            ),
                           ],
                         ),
                       ),

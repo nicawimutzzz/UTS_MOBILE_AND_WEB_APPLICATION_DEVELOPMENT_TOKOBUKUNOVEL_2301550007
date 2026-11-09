@@ -80,7 +80,10 @@ class _BerandaContent extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Toko Buku Novel'),
         actions: [
+          // Minggu 9, Latihan 3: signOut memicu authStateChanges(),
+          // sehingga StreamBuilder otomatis kembali ke halaman Masuk.
           IconButton(
+            tooltip: 'Keluar',
             icon: const Icon(Icons.logout),
             onPressed: () => context.read<AuthProvider>().logout(),
           ),

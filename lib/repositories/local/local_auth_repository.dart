@@ -1,11 +1,14 @@
+import 'dart:async';
+
 import '../../models/user.dart';
 import '../auth_repository.dart';
 import 'mock_data.dart';
 
 /// Implementasi lokal AuthRepository — data di memori.
-/// Login: cek email/password di mockUsers.
+/// Dipertahankan untuk widget test (tanpa Firebase) dan sebagai fallback.
 class LocalAuthRepository implements AuthRepository {
   final List<User> _users = List.from(mockUsers);
+  final StreamController<User?> _perubahan = StreamController<User?>.broadcast();
   User? _currentUser;
 
   @override
@@ -17,6 +20,7 @@ class LocalAuthRepository implements AuthRepository {
 
     if (user != null) {
       _currentUser = user;
+      _perubahan.add(user);
       return user;
     }
     return null;
@@ -39,14 +43,22 @@ class LocalAuthRepository implements AuthRepository {
     );
     _users.add(user);
     _currentUser = user;
+    _perubahan.add(user);
     return user;
   }
 
   @override
   Future<void> logout() async {
     _currentUser = null;
+    _perubahan.add(null);
   }
 
   @override
   User? get currentUser => _currentUser;
+
+  @override
+  Stream<User?> get authStateChanges async* {
+    yield _currentUser;
+    yield* _perubahan.stream;
+  }
 }

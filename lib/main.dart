@@ -7,7 +7,7 @@ import 'providers/auth_provider.dart';
 import 'providers/book_provider.dart';
 import 'providers/report_provider.dart';
 import 'providers/transaction_provider.dart';
-import 'repositories/local/local_auth_repository.dart';
+import 'repositories/firebase/firebase_auth_repository.dart';
 import 'repositories/local/local_book_repository.dart';
 import 'repositories/local/local_transaction_repository.dart';
 
@@ -20,8 +20,9 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  // Minggu 9: autentikasi memakai Firebase.
   // Katalog, transaksi, dan laporan masih local (Firestore masuk Minggu 10).
-  final authRepository = LocalAuthRepository();
+  final authRepository = FirebaseAuthRepository();
   final bookRepository = LocalBookRepository();
   final transactionRepository = LocalTransactionRepository();
 

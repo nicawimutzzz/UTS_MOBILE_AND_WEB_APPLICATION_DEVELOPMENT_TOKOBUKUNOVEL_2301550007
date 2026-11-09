@@ -32,12 +32,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future<void> _handleRegister() async {
     if (!_formKey.currentState!.validate()) return;
-    if (_passwordController.text != _confirmController.text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Konfirmasi kata sandi tidak cocok')),
-      );
-      return;
-    }
     final success = await context.read<AuthProvider>().register(
       _namaController.text.trim(),
       _emailController.text.trim(),
@@ -111,7 +105,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     labelText: 'Konfirmasi Kata Sandi',
                     prefixIcon: Icon(Icons.lock_outline),
                   ),
-                  validator: (v) => validateRequired(v, 'Konfirmasi kata sandi'),
+                  // Minggu 9, tabel 6: wajib diisi dan harus sama dengan password
+                  validator: (v) {
+                    if (v == null || v.isEmpty) return 'Ulangi password';
+                    if (v != _passwordController.text) return 'Password tidak sama';
+                    return null;
+                  },
                 ),
                 if (auth.errorMessage.isNotEmpty) ...[
                   const SizedBox(height: 12),
@@ -125,13 +124,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ],
                 const SizedBox(height: 24),
-                auth.status == AuthStatus.loading
-                    ? const Center(child: CircularProgressIndicator())
-                    : ElevatedButton(
-                        style: AppButtonStyles.primary,
-                        onPressed: _handleRegister,
-                        child: const Text('Daftar'),
-                      ),
+                // Tombol dinonaktifkan selama proses (Latihan 2)
+                ElevatedButton(
+                  style: AppButtonStyles.primary,
+                  onPressed: auth.status == AuthStatus.loading
+                      ? null
+                      : _handleRegister,
+                  child: auth.status == AuthStatus.loading
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Text('Daftar'),
+                ),
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: () => Navigator.pop(context),
