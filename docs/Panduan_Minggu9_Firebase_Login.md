@@ -1,13 +1,14 @@
 # Panduan Pengerjaan — Minggu 9
+
 ## Menghubungkan Firebase dan Login Email/Password
 
-| Identitas | Isian |
-|---|---|
-| Nama / NIM | Annisa Asti Indriyani / 2301550007 |
-| Kelas dan judul aplikasi | A1 & A2DLC — **Toko Buku Novel** |
-| Tautan repository GitHub | https://github.com/nicawimutzzz/UTS_MOBILE_AND_WEB_APPLICATION_DEVELOPMENT_TOKOBUKUNOVEL_2301550007 |
-| Nama project Firebase | `toko-buku-novel` (paket Spark) |
-| Target | Chrome (`flutter run -d chrome`) |
+| Identitas                | Isian                                                                                                 |
+| ------------------------ | ----------------------------------------------------------------------------------------------------- |
+| Nama / NIM               | Annisa Asti Indriyani / 2301550007                                                                    |
+| Kelas dan judul aplikasi | A1 & A2DLC — **Toko Buku Novel**                                                                      |
+| Tautan repository GitHub | <https://github.com/nicawimutzzz/UTS_MOBILE_AND_WEB_APPLICATION_DEVELOPMENT_TOKOBUKUNOVEL_2301550007> |
+| Nama project Firebase    | `toko-buku-novel` (paket Spark)                                                                       |
+| Target                   | Chrome (`flutter run -d chrome`)                                                                      |
 
 Sumber: `modul-minggu-09-firebase-login.docx` (8 bab, 15 tabel) dan `materi-ajar-minggu-09-firebase-login.pptx` (24 slide).
 
@@ -18,6 +19,7 @@ Sumber: `modul-minggu-09-firebase-login.docx` (8 bab, 15 tabel) dan `materi-ajar
 ## A. Apa yang dituntut modul
 
 **5 target capaian** (slide 3):
+
 1. Menjelaskan peran Firebase Auth, autentikasi, dan otorisasi.
 2. Membuat project Spark dan menghubungkannya ke Flutter.
 3. Membangun alur daftar, masuk, dan keluar.
@@ -25,6 +27,7 @@ Sumber: `modul-minggu-09-firebase-login.docx` (8 bab, 15 tabel) dan `materi-ajar
 5. Menampilkan pesan kesalahan login yang jelas.
 
 **7 luaran yang dikumpulkan** (slide 3 & 24, tabel 13):
+
 - Project Spark terhubung, tanpa billing account
 - Daftar, masuk, keluar berjalan di Chrome
 - Halaman utama hanya terbuka setelah login
@@ -34,7 +37,7 @@ Sumber: `modul-minggu-09-firebase-login.docx` (8 bab, 15 tabel) dan `materi-ajar
 - Screenshot **Authentication > Users**
 - ≥ 2 commit baru ter-push + tautan repository
 
-**Batas pertemuan ini** (slide 2): target **Chrome**, hanya penyedia **Email/Password**, paket **Spark**.
+**Batas pertemuan ini** (slide 2): target **Chrome**, hanya penyedia **Email/Password**, paket **Spark**.  
 Hindari: billing account, login Google / nomor telepon, **password asli Anda**, dan **Firestore** (masuk Minggu 10).
 
 ---
@@ -43,16 +46,16 @@ Hindari: billing account, login Google / nomor telepon, **password asli Anda**, 
 
 Modul memakai studi kasus *RoomBook* (reservasi ruangan). Padanan di project kamu:
 
-| Konsep di modul | Di TokoBukuNovel |
-|---|---|
-| `RoomBookApp` | `TokoBukuNovelApp` (`lib/app.dart`) |
-| Halaman Utama / reservasi | `HomePage` — dashboard, katalog buku, transaksi, laporan |
+| Konsep di modul                       | Di TokoBukuNovel                                                                    |
+| ------------------------------------- | ----------------------------------------------------------------------------------- |
+| `RoomBookApp`                         | `TokoBukuNovelApp` (`lib/app.dart`)                                                 |
+| Halaman Utama / reservasi             | `HomePage` — dashboard, katalog buku, transaksi, laporan                            |
 | `masuk_page.dart` (1 halaman, 2 mode) | `login_page.dart` + `register_page.dart` (2 halaman, pola Form Minggu 7 tetap sama) |
-| `cek_status_login.dart` | `_AuthGate` di `lib/app.dart` (`StreamBuilder` + `authStateChanges()`) |
-| `validasi_auth.dart` | `lib/utils/validators.dart` + **baru** `lib/utils/auth_errors.dart` |
-| `lib/firebase_options.dart` | **baru** `lib/firebase_options.dart` (jalur cadangan) |
-| Data reservasi di memori | `LocalBookRepository` / `LocalTransactionRepository` (masih lokal) |
-| Contoh kode `contoh-kode-roombook` | Project ini sendiri |
+| `cek_status_login.dart`               | `_AuthGate` di `lib/app.dart` (`StreamBuilder` + `authStateChanges()`)              |
+| `validasi_auth.dart`                  | `lib/utils/validators.dart` + **baru** `lib/utils/auth_errors.dart`                 |
+| `lib/firebase_options.dart`           | **baru** `lib/firebase_options.dart` (jalur cadangan)                               |
+| Data reservasi di memori              | `LocalBookRepository` / `LocalTransactionRepository` (masih lokal)                  |
+| Contoh kode `contoh-kode-roombook`    | Project ini sendiri                                                                 |
 
 > Catatan: modul menyarankan **satu halaman dua mode**. Project kamu sudah punya dua halaman terpisah dengan `Form` + `GlobalKey` + `validator` + `obscureText` yang sama persis. Ini tetap memenuhi substansi Latihan 2 — tuliskan alasannya di refleksi bila dosen menanyakan.
 
@@ -60,67 +63,79 @@ Modul memakai studi kasus *RoomBook* (reservasi ruangan). Padanan di project kam
 
 ## C. Yang SUDAH dikerjakan di repository
 
-| # | File | Perubahan |
-|---|---|---|
-| 1 | `pubspec.yaml` | `sdk: ^3.6.0`; `firebase_core: 5.1.0`, `firebase_auth: 7.0.1` |
-| 2 | `lib/firebase_options.dart` | **Baru** — config project `toko-buku-novel` (jalur cadangan, hal. 12) |
-| 3 | `lib/main.dart` | `Future<void> main() async` + `await Firebase.initializeApp(...)` sebelum `runApp` |
-| 4 | `lib/repositories/auth_repository.dart` | Tambah kontrak `Stream<User?> get authStateChanges` |
-| 5 | `lib/repositories/firebase/firebase_auth_repository.dart` | **Diisi** — daftar/masuk/keluar + terjemahan `FirebaseAuthException` |
-| 6 | `lib/repositories/local/local_auth_repository.dart` | Implementasi stream untuk widget test |
-| 7 | `lib/utils/auth_errors.dart` | **Baru** — `pesanKesalahanAuth(kode)` untuk 8 kode error |
-| 8 | `lib/providers/auth_provider.dart` | Dengarkan `authStateChanges`, tangkap `AuthFailure`, sinkron `_user` |
-| 9 | `lib/app.dart` | `_AuthGate` → `StreamBuilder<User?>`; parameter `halamanAwal` untuk test |
-| 10 | `lib/pages/login_page.dart` | Hapus kredensial bawaan, tombol nonaktif saat proses, hint akun simulasi |
-| 11 | `lib/pages/register_page.dart` | Validator "Ulangi password" / "Password tidak sama", tombol nonaktif |
-| 12 | `lib/pages/home_page.dart` | Tombol Keluar diberi `tooltip: 'Keluar'` |
-| 13 | `test/widget_test.dart` | Pakai `halamanAwal`, + 2 unit test terjemahan pesan error |
+| #  | File                                                      | Perubahan                                                                          |
+| -- | --------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| 1  | `pubspec.yaml`                                            | `sdk: ^3.6.0`; `firebase_core: 5.1.0`, `firebase_auth: 7.0.1`                      |
+| 2  | `lib/firebase_options.dart`                               | **Baru** — config project `toko-buku-novel` (jalur cadangan, hal. 12)              |
+| 3  | `lib/main.dart`                                           | `Future<void> main() async` + `await Firebase.initializeApp(...)` sebelum `runApp` |
+| 4  | `lib/repositories/auth_repository.dart`                   | Tambah kontrak `Stream<User?> get authStateChanges`                                |
+| 5  | `lib/repositories/firebase/firebase_auth_repository.dart` | **Diisi** — daftar/masuk/keluar + terjemahan `FirebaseAuthException`               |
+| 6  | `lib/repositories/local/local_auth_repository.dart`       | Implementasi stream untuk widget test                                              |
+| 7  | `lib/utils/auth_errors.dart`                              | **Baru** — `pesanKesalahanAuth(kode)` untuk 8 kode error                           |
+| 8  | `lib/providers/auth_provider.dart`                        | Dengarkan `authStateChanges`, tangkap `AuthFailure`, sinkron `_user`               |
+| 9  | `lib/app.dart`                                            | `_AuthGate` → `StreamBuilder<User?>`; parameter `halamanAwal` untuk test           |
+| 10 | `lib/pages/login_page.dart`                               | Hapus kredensial bawaan, tombol nonaktif saat proses, hint akun simulasi           |
+| 11 | `lib/pages/register_page.dart`                            | Validator "Ulangi password" / "Password tidak sama", tombol nonaktif               |
+| 12 | `lib/pages/home_page.dart`                                | Tombol Keluar diberi `tooltip: 'Keluar'`                                           |
+| 13 | `test/widget_test.dart`                                   | Pakai `halamanAwal`, + 2 unit test terjemahan pesan error                          |
 
-**Verifikasi yang sudah lolos:** `flutter pub get` ✅ · `flutter analyze` **0 error** ✅ · `flutter build web` ✅
+**Verifikasi yang sudah lolos:** `flutter pub get` ✅ · `flutter analyze` **0 error** ✅ · `flutter build web` ✅  
 `flutter test` gagal di mesin ini karena `WebSocketException: Invalid WebSocket upgrade request` (masalah environment `flutter_tester`, bukan kode) — catat di refleksi.
+
+**Bukti praktikum yang sudah terkumpul (9 Nov 2026):**
+- `docs/screenshot-auth-users.png` — Authentication > Users, 1 akun `annisa@toko.com`, provider Email/Password, paket Spark $0/month.
+- `docs/screenshot-beranda-setelah-login.png` — Beranda tampil otomatis setelah **Daftar**, dengan sapaan "Selamat datang, Annisa Simulasi!" (membuktikan `displayName` tersimpan dan `_AuthGate` berpindah halaman).
+- Keduanya sudah tertempel di `docs/Lembar_Kerja_Minggu9_Annisa_Asti_Indriyani.docx` (Bagian E.5 dan G.2).
 
 ---
 
 ## D. Yang HARUS kamu lakukan sendiri (di Firebase Console & kelas)
 
 ### Langkah 1 — Aktifkan penyedia Email/Password ⚠️ PALING SERING TERLEWAT
-1. Buka https://console.firebase.google.com → pilih project **`toko-buku-novel`**.
+
+1. Buka <https://console.firebase.google.com> → pilih project **`toko-buku-novel`**.
 2. Pastikan paket masih **Spark** dan **tidak ada billing account**.
 3. Buka **Build → Authentication → Get started → tab Sign-in method**.
 4. Aktifkan **Email/Password** → Save.
    - Kalau ini belum aktif, semua percobaan login akan gagal dengan `operation-not-allowed`.
 
 ### Langkah 2 — Pastikan aplikasi web terdaftar
-Project settings → **Your apps** → ikon `</>`. Aplikasi web sudah kamu daftarkan (dari `firebaseConfig` yang kamu miliki).
+
+Project settings → **Your apps** → ikon `</>`. Aplikasi web sudah kamu daftarkan (dari `firebaseConfig` yang kamu miliki).  
 Nilainya sudah disalin ke `lib/firebase_options.dart`, jadi **tidak perlu** menjalankan FlutterFire CLI.
 
 ### Langkah 3 — Jalankan di Chrome
+
 ```bash
-cd D:\dev\tokobukunovel
+c
 flutter pub get
 flutter run -d chrome
 ```
+
 Pastikan tidak muncul `No Firebase App '[DEFAULT]' has been created`.
 
 ### Langkah 4 — Buat akun simulasi
-Tekan **Daftar**, isi nama + email + password simulasi, misalnya:
-`annisa@toko.com` / `toko123456` — **jangan pakai password asli Anda**.
+
+Tekan **Daftar**, isi nama + email + password simulasi, misalnya:  
+`annisa@toko.com` / `toko123456` — **jangan pakai password asli Anda**.  
 Setelah berhasil, cek **Authentication > Users** → akun harus muncul. **Ambil screenshot di sini** (salah satu luaran wajib).
 
 ### Langkah 5 — Uji 5+ kasus (isi tabel di bawah)
+
 ### Langkah 6 — Uji teman + commit
+
 Minta teman mencoba kolom kosong, email salah format, password salah; daftar akun baru; refresh; tekan Keluar. Perbaiki satu temuan, lalu commit & push.
 
 ---
 
 ## E. Empat latihan & buktinya
 
-| Latihan | Isi | Bukti saat kelas | Status kode |
-|---|---|---|---|
-| 1 | Setup Firebase | Aplikasi berjalan setelah inisialisasi | ✅ Selesai |
-| 2 | Halaman Masuk/Daftar | Akun simulasi muncul di Console | ✅ Kode siap, tinggal diuji |
-| 3 | Cek status login | Sesi bertahan setelah refresh | ✅ Kode siap, tinggal diuji |
-| 4 | Pesan kesalahan | Tabel uji terisi | ✅ Kode siap, tabel di bawah |
+| Latihan | Isi                  | Bukti saat kelas                       | Status kode                 |
+| ------- | -------------------- | -------------------------------------- | --------------------------- |
+| 1       | Setup Firebase       | Aplikasi berjalan setelah inisialisasi | ✅ Selesai                   |
+| 2       | Halaman Masuk/Daftar | Akun simulasi muncul di Console        | ✅ Kode siap, tinggal diuji  |
+| 3       | Cek status login     | Sesi bertahan setelah refresh          | ✅ Kode siap, tinggal diuji  |
+| 4       | Pesan kesalahan      | Tabel uji terisi                       | ✅ Kode siap, tabel di bawah |
 
 ---
 
@@ -128,32 +143,32 @@ Minta teman mencoba kolom kosong, email salah format, password salah; daftar aku
 
 Isi kolom **Hasil nyata** setelah menjalankan Langkah 5.
 
-| # | Kasus uji | Input | Hasil yang diharapkan | Hasil nyata |
-|---|---|---|---|---|
-| 1 | Login benar | Akun simulasi yang sudah dibuat | Halaman Utama (Beranda) tampil | |
-| 2 | Password salah | Email benar + password `salah123` | `Email atau password salah` | |
-| 3 | Email tidak valid | `bukan-email` | `Format email tidak valid` (validator Form) | |
-| 4 | Kolom kosong | Email & password dikosongkan | Kedua kolom menampilkan pesan wajib isi | |
-| 5 | Daftar dengan email terpakai | Email yang sudah terdaftar | `Email sudah terdaftar. Silakan masuk.` | |
-| 6 | Password terlalu pendek | `123` saat daftar | `Kata sandi minimal 6 karakter` | |
-| 7 | Konfirmasi password beda | Password `toko123456`, ulangi `toko654321` | `Password tidak sama` | |
-| 8 | Refresh setelah login | Tekan F5 di Chrome | Tetap di Halaman Utama (sesi bertahan) | |
-| 9 | Tekan Keluar | Ikon logout di AppBar Beranda | Kembali ke Halaman Masuk | |
-| 10 | Refresh lalu cek data | Refresh, buka menu Transaksi | Transaksi baru hilang (masih di memori) | |
+| #  | Kasus uji                    | Input                                      | Hasil yang diharapkan                       | Hasil nyata |
+| -- | ---------------------------- | ------------------------------------------ | ------------------------------------------- | ----------- |
+| 1  | Login benar                  | Akun simulasi yang sudah dibuat            | Halaman Utama (Beranda) tampil              |             |
+| 2  | Password salah               | Email benar + password `salah123`          | `Email atau password salah`                 |             |
+| 3  | Email tidak valid            | `bukan-email`                              | `Format email tidak valid` (validator Form) |             |
+| 4  | Kolom kosong                 | Email & password dikosongkan               | Kedua kolom menampilkan pesan wajib isi     |             |
+| 5  | Daftar dengan email terpakai | Email yang sudah terdaftar                 | `Email sudah terdaftar. Silakan masuk.`     |             |
+| 6  | Password terlalu pendek      | `123` saat daftar                          | `Kata sandi minimal 6 karakter`             |             |
+| 7  | Konfirmasi password beda     | Password `toko123456`, ulangi `toko654321` | `Password tidak sama`                       |             |
+| 8  | Refresh setelah login        | Tekan F5 di Chrome                         | Tetap di Halaman Utama (sesi bertahan)      |             |
+| 9  | Tekan Keluar                 | Ikon logout di AppBar Beranda              | Kembali ke Halaman Masuk                    |             |
+| 10 | Refresh lalu cek data        | Refresh, buka menu Transaksi               | Transaksi baru hilang (masih di memori)     |             |
 
 > Kasus 10 adalah **jembatan ke Minggu 10**: sesi login bertahan, data buku/transaksi belum.
 
 ### Pemetaan kode error (bab 6 / slide 19)
 
-| `e.code` | Pesan untuk pengguna |
-|---|---|
-| `invalid-credential` / `wrong-password` / `user-not-found` | Email atau password salah |
-| `invalid-email` | Format email belum benar |
-| `email-already-in-use` | Email sudah terdaftar. Silakan masuk. |
-| `weak-password` | Password terlalu lemah, minimal 6 karakter |
-| `too-many-requests` | Terlalu banyak percobaan. Coba lagi nanti. |
-| `network-request-failed` | Tidak dapat terhubung. Periksa koneksi internet. |
-| `operation-not-allowed` | Login email/password belum diaktifkan |
+| `e.code`                                                   | Pesan untuk pengguna                             |
+| ---------------------------------------------------------- | ------------------------------------------------ |
+| `invalid-credential` / `wrong-password` / `user-not-found` | Email atau password salah                        |
+| `invalid-email`                                            | Format email belum benar                         |
+| `email-already-in-use`                                     | Email sudah terdaftar. Silakan masuk.            |
+| `weak-password`                                            | Password terlalu lemah, minimal 6 karakter       |
+| `too-many-requests`                                        | Terlalu banyak percobaan. Coba lagi nanti.       |
+| `network-request-failed`                                   | Tidak dapat terhubung. Periksa koneksi internet. |
+| `operation-not-allowed`                                    | Login email/password belum diaktifkan            |
 
 **Kenapa pesan `user-not-found` dan `wrong-password` disamakan?** Karena project Firebase baru mengaktifkan *email enumeration protection*. Kalau pesannya dibedakan, orang lain bisa menebak email mana yang terdaftar.
 
@@ -161,26 +176,29 @@ Isi kolom **Hasil nyata** setelah menjalankan Langkah 5.
 
 ## G. Daftar periksa luaran
 
-| Butir | Ya/Belum |
-|---|---|
-| Project Firebase Spark terhubung, tanpa billing | ☐ |
-| Daftar, masuk, dan keluar berjalan di Chrome | ☐ |
-| Halaman utama hanya terbuka setelah login | ☐ |
-| Sesi bertahan setelah refresh | ☐ |
-| Kesalahan login tampil sebagai pesan yang jelas | ☐ |
-| Tabel uji login ≥ 5 kasus terisi | ☐ |
-| Screenshot daftar pengguna di Authentication > Users | ☐ |
-| ≥ 2 commit baru ter-push | ☑ **3 commit**: `d2349ab` (Latihan 1), `5ffd89c` (Latihan 2–4 + dokumen), `18a8812` (README) — sudah di-push ke `origin/main` |
+| Butir                                                | Ya/Belum                                                                                                                      |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Project Firebase Spark terhubung, tanpa billing      | ☑ Screenshot Console, Spark $0/month                                                                                            |
+| Daftar, masuk, dan keluar berjalan di Chrome         | Sebagian: **daftar ✅**, masuk & keluar menyusul (kasus 1 & 9)                                                                 |
+| Halaman utama hanya terbuka setelah login            | ☑ Halaman Masuk tampil lebih dulu, lalu Beranda otomatis                                                                         |
+| Sesi bertahan setelah refresh                        | ☐ Kasus 8                                                                                                                      |
+| Kesalahan login tampil sebagai pesan yang jelas      | ☐ Kasus 2–7                                                                                                                    |
+| Tabel uji login ≥ 5 kasus terisi                     | ☐ 10 kasus disiapkan, kolom Hasil nyata menyusul                                                                                |
+| Screenshot daftar pengguna di Authentication > Users | ☑ `docs/screenshot-auth-users.png` — tertempel di lembar kerja                                                                   |
+| ≥ 2 commit baru ter-push                             | ☑ **≥ 4 commit** (`d2349ab`, `5ffd89c`, `18a8812`, `5732dc7`, dst.) — lihat `git log --oneline`                              |
 
 ---
 
 ## H. Refleksi individu (bisa dipakai sebagai jawaban)
 
-**1. Halaman mana yang boleh dibuka tanpa login, dan mengapa?**
+**1. Halaman mana yang boleh dibuka tanpa login, dan mengapa?**  
 Halaman **Masuk** dan **Daftar**. Keduanya adalah satu-satunya jalan bagi pengguna untuk membuktikan identitas; kalau halaman ini pun diproteksi, tidak ada pintu masuk. `_AuthGate` di `lib/app.dart` memakai `authStateChanges()` dan hanya mengarahkan ke `HomePage` bila ada `User`. Beranda, Daftar Buku, Transaksi, dan Laporan hanya untuk pengguna yang sudah masuk karena menampilkan stok dan data penjualan — ini contoh **otorisasi** ("boleh melakukan apa"), berbeda dengan **autentikasi** ("siapa kamu").
 
 **2. Kendala saat setup dan cara mengatasinya?**
+
 - `firebase_core 5.1.0` mensyaratkan Dart SDK `^3.6.0`, sementara `pubspec.yaml` masih `^3.5.0` → constraint dinaikkan menjadi `^3.6.0`. (Modul diuji dengan Flutter 3.27; mesin ini memakai Flutter 3.47.7.)
+
+
 - `firebase-tools` dan `flutterfire` CLI belum terpasang → memakai **jalur cadangan** yang diizinkan modul (hal. 12): menyalin `firebaseConfig` dari Console ke `lib/firebase_options.dart`. Hasilnya sama.
 - Widget test akan membuka auth gate yang butuh Firebase → ditambahkan parameter `halamanAwal` pada `TokoBukuNovelApp` sehingga test tetap memakai `LocalAuthRepository` (sesuai tabel masalah umum hal. 23).
 - `flutter test` gagal dengan `WebSocketException: Invalid WebSocket upgrade request` — kendala lingkungan `flutter_tester` di mesin ini, bukan kode. Pembuktian kompilasi dilakukan lewat `flutter analyze` (0 error) dan `flutter build web` (berhasil).

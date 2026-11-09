@@ -48,6 +48,16 @@ flutter run -d chrome   # atau: flutter run (untuk device lain)
 
 *Halaman beranda aplikasi TokoBukuNovel menampilkan dashboard ringkasan penjualan, katalog buku, dan navigasi bottom bar.*
 
+### Bukti Minggu 9 — Firebase Login
+
+![Daftar pengguna Firebase Authentication](docs/screenshot-auth-users.png)
+
+*Firebase Console → Authentication → Users: akun simulasi `annisa@toko.com` berhasil terdaftar dengan provider Email/Password pada paket Spark $0/month.*
+
+![Beranda setelah daftar akun](docs/screenshot-beranda-setelah-login.png)
+
+*Beranda tampil otomatis setelah menekan **Daftar**, dengan sapaan "Selamat datang, Annisa Simulasi!" yang berasal dari `displayName` Firebase — bukti `_AuthGate` berpindah halaman mengikuti `authStateChanges()`.*
+
 ## Struktur Project
 
 ```
