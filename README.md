@@ -158,5 +158,6 @@ npm run render   # render ke out/uts-tokobukunovel.mp4
 | 18 | `c299164` | 9 Nov 2026 | Minggu 9: sinkronisasi bukti commit ke README dan lembar kerja |
 | 19 | `066746d` | 9 Nov 2026 | README: catat commit bukti 3 akun di Riwayat Commit |
 | 20 | `e358542` | 9 Nov 2026 | Minggu 9: catat bukti hot reload dan verifikasi modul DDC `resetStatus()` di lembar kerja |
+| 21 | `1e71cd0` | 9 Nov 2026 | Minggu 9: Bagian L.3 — 3 screenshot bukti sebelum/sesudah perbaikan temuan + verifikasi visual |
 
 Riwayat commit bertahap dari minggu 5 (26 Okt) hingga Minggu 9 (9 Nov), mencakup inisialisasi project, penambahan dokumentasi, perbaikan test, submission UTS, penyempurnaan README, integrasi Firebase Authentication, pengisian tabel uji, dan perbaikan temuan uji teman. Riwayat lengkap dapat dilihat dengan `git log --oneline`.
