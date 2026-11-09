@@ -96,5 +96,6 @@ npm run render   # render ke out/uts-tokobukunovel.mp4
 | 4 | `dd25263` | 2 Nov 2026 | Initial commit (merge remote) |
 | 5 | `b5b15a7` | 2 Nov 2026 | UTS: Tambah proposal, video Remotion + TTS, dan perbarui README |
 | 6 | `31ed940` | 2 Nov 2026 | Merge remote README, keep local version |
+| 7 | `347d975` | 4 Nov 2026 | README: tambah section Screenshot dan Riwayat Commit |
 
-Riwayat commit bertahap dari minggu 5 (26 Okt) hingga minggu UTS (2 Nov), mencakup inisialisasi project, penambahan dokumentasi, perbaikan test, dan submission UTS.
+Riwayat commit bertahap dari minggu 5 (26 Okt) hingga minggu UTS (4 Nov), mencakup inisialisasi project, penambahan dokumentasi, perbaikan test, submission UTS, dan penyempurnaan README.
