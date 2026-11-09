@@ -141,11 +141,11 @@ Minta teman mencoba kolom kosong, email salah format, password salah; daftar aku
 
 ## F. Tabel uji login (Latihan 4)
 
-Isi kolom **Hasil nyata** setelah menjalankan Langkah 5. **8 dari 10 kasus sudah terisi** (kasus 2–9, diverifikasi 9 Nov 2026) dan sudah disalin ke lembar kerja DOCX. **Syarat modul "tabel uji ≥ 5 kasus" terlampaui.** Tersisa kasus 1 dan 10.
+Isi kolom **Hasil nyata** setelah menjalankan Langkah 5. **10 dari 10 kasus sudah terisi** (diverifikasi 9 Nov 2026) dan sudah disalin ke lembar kerja DOCX. **Syarat modul "tabel uji ≥ 5 kasus" terlampaui.** Kasus 1 dan 10 diverifikasi dengan menjalankan aplikasi sungguhan di Chrome (lihat §M).
 
 | #  | Kasus uji                    | Input                                      | Hasil yang diharapkan                       | Hasil nyata |
 | -- | ---------------------------- | ------------------------------------------ | ------------------------------------------- | ----------- |
-| 1  | Login benar                  | Akun simulasi yang sudah dibuat            | Halaman Utama (Beranda) tampil              |             |
+| 1  | Login benar                  | `annisa@toko.com` / `toko123456`           | Halaman Utama (Beranda) tampil              | ✅ Beranda + sapaan "Selamat datang, Annisa Simulasi!", tanpa error (§M) |
 | 2  | Password salah               | Email benar + password `salah123`          | `Email atau password salah`                 | ✅ Kotak merah "Email atau password salah" |
 | 3  | Email tidak valid            | `bukan-email`                              | `Format email tidak valid` (validator Form) | ✅ Pesan merah di bawah kolom Email |
 | 4  | Kolom kosong                 | Email & password dikosongkan               | Kedua kolom menampilkan pesan wajib isi     | ✅ Kedua pesan wajib isi muncul |
@@ -154,7 +154,7 @@ Isi kolom **Hasil nyata** setelah menjalankan Langkah 5. **8 dari 10 kasus sudah
 | 7  | Konfirmasi password beda     | Password `toko123456`, ulangi `toko654321` | `Password tidak sama`                       | ✅ Pesan di bawah Konfirmasi (+ temuan, sudah diperbaiki — lihat §L) |
 | 8  | Refresh setelah login        | Tekan F5 / Ctrl+R di Chrome                | Tetap di Halaman Utama (sesi bertahan)      | ✅ Sesuai — Beranda tetap tampil, sapaan nama masih ada |
 | 9  | Tekan Keluar                 | Ikon logout di AppBar Beranda              | Kembali ke Halaman Masuk                    | ✅ Sesuai — kembali ke halaman Masuk |
-| 10 | Refresh lalu cek data        | Refresh, buka menu Transaksi               | Transaksi baru hilang (masih di memori)     |             |
+| 10 | Refresh lalu cek data        | Buat 1 transaksi Rp 85.000, lalu refresh   | Transaksi baru hilang (masih di memori)     | ✅ Rp 85.000/1 transaksi/stok 11 → **Rp 0/0 transaksi/stok 12**; sesi login tetap (§M) |
 
 > Kasus 10 adalah **jembatan ke Minggu 10**: sesi login bertahan, data buku/transaksi belum.
 
@@ -179,13 +179,13 @@ Isi kolom **Hasil nyata** setelah menjalankan Langkah 5. **8 dari 10 kasus sudah
 | Butir                                                | Ya/Belum                                                                                                                      |
 | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | Project Firebase Spark terhubung, tanpa billing      | ☑ Screenshot Console, Spark $0/month                                                                                            |
-| Daftar, masuk, dan keluar berjalan di Chrome         | Sebagian: **daftar ✅** dan **keluar ✅** (kasus 9); masuk menyusul (kasus 1)                                                |
+| Daftar, masuk, dan keluar berjalan di Chrome         | ☑ Lengkap — daftar (Screenshot 2), masuk (kasus 1), keluar (kasus 9)                                                |
 | Halaman utama hanya terbuka setelah login            | ☑ Halaman Masuk tampil lebih dulu, lalu Beranda otomatis, lalu Keluar kembali ke Masuk                                         |
 | Sesi bertahan setelah refresh                        | ☑ **Kasus 8** — Beranda tetap tampil setelah Ctrl+R, sapaan nama masih ada                                                    |
 | Kesalahan login tampil sebagai pesan yang jelas      | ☑ Seluruh kasus 2–7 teruji, pesan sesuai yang diharapkan                                                                   |
-| Tabel uji login ≥ 5 kasus terisi                     | ☑ **8 dari 10 kasus** — jauh melebihi syarat minimal 5, tertulis di lembar kerja DOCX                                      |
+| Tabel uji login ≥ 5 kasus terisi                     | ☑ **10 dari 10 kasus** — jauh melebihi syarat minimal 5, tertulis di lembar kerja DOCX                                      |
 | Screenshot daftar pengguna di Authentication > Users | ☑ `docs/screenshot-auth-users.png` — tertempel di lembar kerja                                                                   |
-| ≥ 2 commit baru ter-push                             | ☑ **8 commit khusus Minggu 9** (`d2349ab` … `42eda55`) — lihat Bagian L lembar kerja dan `git log --oneline`                  |
+| ≥ 2 commit baru ter-push                             | ☑ **Lebih dari 15 commit khusus Minggu 9** — lihat Bagian L lembar kerja dan `git log --oneline`                  |
 
 ---
 
@@ -266,4 +266,24 @@ git log --oneline -4            # bukti commit bertahap
 
 > **Catatan kejujuran bukti.** Screenshot 5 memotret keadaan akhir halaman Daftar; kotak merah di halaman Masuk sesaat sebelumnya tidak ikut terfoto. Screenshot 3 dan 5 tidak diambil dengan kondisi form identik, jadi keduanya adalah bukti kualitatif, bukan perbandingan piksel. Bukti objektif tambahan ada pada isi modul DDC di baris **Verifikasi** di atas.
 
-Detail lengkap ada di **Bagian L.2** dan **Bagian L.3** lembar kerja DOCX.
+Detail lengkap ada di **Bagian L.2**, **Bagian L.3**, dan **Bagian M** lembar kerja DOCX.
+
+---
+
+## M. Bukti kasus 1 dan 10 (tabel uji lengkap 10/10)
+
+![Kasus 1 — Beranda setelah login benar](screenshot-kasus1-login-berhasil.png)
+
+*Screenshot 6: `annisa@toko.com` / `toko123456` → Beranda dengan sapaan **"Selamat datang, Annisa Simulasi!"**, tanpa kotak error.*
+
+![Kasus 10 — SEBELUM refresh](screenshot-kasus10-sebelum-refresh.png)
+
+*Screenshot 7: setelah 1 transaksi Bumi Manusia (Rp 85.000) → Penjualan Hari Ini **Rp 85.000**, Transaksi Hari Ini **1**, stok **11**.*
+
+![Kasus 10 — SESUDAH refresh](screenshot-kasus10-sesudah-refresh.png)
+
+*Screenshot 8: sesudah refresh → **Rp 0**, **0 transaksi**, stok kembali **12**; sapaan nama tetap ada (sesi Firebase Auth bertahan).*
+
+> **Catatan kejujuran bukti.** Kasus 1 dan 10 dijalankan dengan otomasi browser **Playwright + Google Chrome (headless)** terhadap aplikasi di `localhost:59133` dan Firebase project yang sama, bukan diketik manual di layar. Flutter semantics diaktifkan agar kolom/tombol dapat diisi dan ditekan seperti pengguna biasa; login tetap memakai Firebase Authentication asli. Angka dan teks di atas dibaca dari layar aplikasi yang benar-benar berjalan. Kasus 2–9 diverifikasi manual lewat screenshot mahasiswa.
+
+**Makna temuan kasus 10:** autentikasi sudah persisten, data bisnis belum. Menjadi pengantar Minggu 10 (Cloud Firestore): cukup ganti implementasi repository tanpa mengubah UI.

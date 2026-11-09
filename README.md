@@ -72,6 +72,20 @@ flutter run -d chrome   # atau: flutter run (untuk device lain)
 
 *Screenshot 5 (sesudah `resetStatus()` + hot reload): setelah login gagal lalu klik **Daftar**, halaman Daftar bersih tanpa kotak merah sisa. Bukti kualitatif; verifikasi objektif lewat modul DDC ada di Bagian L.2 lembar kerja.*
 
+### Bukti kasus 1 dan 10 (tabel uji 10/10)
+
+![Kasus 1 — Beranda setelah login benar](docs/screenshot-kasus1-login-berhasil.png)
+
+*Screenshot 6: login `annisa@toko.com` / `toko123456` membuka Beranda dengan sapaan "Selamat datang, Annisa Simulasi!" tanpa pesan error.*
+
+![Kasus 10 — SEBELUM refresh](docs/screenshot-kasus10-sebelum-refresh.png)
+
+*Screenshot 7: setelah 1 transaksi Rp 85.000 → Penjualan Hari Ini **Rp 85.000**, Transaksi Hari Ini **1**, stok Bumi Manusia **11**.*
+
+![Kasus 10 — SESUDAH refresh](docs/screenshot-kasus10-sesudah-refresh.png)
+
+*Screenshot 8: sesudah refresh → **Rp 0**, **0 transaksi**, stok kembali **12**. Sesi login tetap bertahan, data bisnis belum persisten (in-memory) → materi Minggu 10: Cloud Firestore.*
+
 ## Struktur Project
 
 ```
@@ -111,12 +125,12 @@ lib/
 | Pesan kesalahan | `lib/utils/auth_errors.dart` — 8 kode `FirebaseAuthException` diterjemahkan ke bahasa pengguna |
 | Target uji | Chrome (`flutter run -d chrome`) |
 | Verifikasi | `flutter pub get` ✅ · `flutter analyze` **0 error** ✅ · `flutter build web` ✅ |
-| Tabel uji | **8 dari 10 kasus terisi** (kasus 2–9) ✅ — melebihi syarat minimal 5 |
-| Bukti | 5 screenshot di `docs/`: `screenshot-auth-users.png`, `screenshot-beranda-setelah-login.png`, dan 3 screenshot sebelum/sesudah perbaikan temuan |
+| Tabel uji | **10 dari 10 kasus terisi** ✅ — jauh melebihi syarat minimal 5 |
+| Bukti | 8 screenshot di `docs/`: 2 bukti Firebase, 3 bukti sebelum/sesudah perbaikan temuan, 3 bukti kasus 1 & 10 |
 | Uji teman | 1 temuan diperbaiki: pesan error terbawa antar halaman → `resetStatus()` sebelum navigasi Masuk ↔ Daftar; **terverifikasi visual** di Chrome 9 Nov 2026 pukul 20:52 |
 | Hot reload | `Reloaded application in 6,540ms`; modul DDC `login_page.dart.lib.js` & `register_page.dart.lib.js` memuat panggilan `resetStatus()` |
 
-Panduan langkah demi langkah, tabel uji 10 kasus, jawaban refleksi, **Bagian L.2 (temuan uji teman dan perbaikannya)**, serta **Bagian L.3 (bukti visual sebelum/sesudah)** tersedia di `docs/Panduan_Minggu9_Firebase_Login.md` dan `docs/Lembar_Kerja_Minggu9_Annisa_Asti_Indriyani.docx`. Screenshot **Authentication > Users** sudah diverifikasi (3 akun). Yang tersisa hanyalah kolom **Hasil nyata** kasus 1 (login benar) dan kasus 10 (refresh lalu cek data) di Bagian G.1; keduanya boleh diisi saat praktikum berjalan. Lima screenshot bukti sudah tertanam di lembar kerja DOCX.
+Panduan langkah demi langkah, tabel uji 10 kasus, jawaban refleksi, **Bagian L.2 (temuan uji teman dan perbaikannya)**, **Bagian L.3 (bukti visual sebelum/sesudah)**, serta **Bagian M (bukti kasus 1 & 10)** tersedia di `docs/Panduan_Minggu9_Firebase_Login.md` dan `docs/Lembar_Kerja_Minggu9_Annisa_Asti_Indriyani.docx`. **Seluruh 10 kasus uji sudah terisi hasil nyatanya**; 8 screenshot bukti tertanam di lembar kerja DOCX. Kasus 1 dan 10 diverifikasi dengan otomasi browser (Playwright + Chrome) terhadap aplikasi dan Firebase asli — dicatat transparan di Bagian M. Temuan kasus 10 (data bisnis belum persisten) menjadi pengantar Minggu 10: Cloud Firestore.
 
 > Catatan lingkungan: `flutter test` pada mesin ini gagal dengan `WebSocketException: Invalid WebSocket upgrade request` (masalah `flutter_tester`, bukan kode). Pembuktian kompilasi dilakukan melalui `flutter analyze` dan `flutter build web`.
 
@@ -159,5 +173,6 @@ npm run render   # render ke out/uts-tokobukunovel.mp4
 | 19 | `066746d` | 9 Nov 2026 | README: catat commit bukti 3 akun di Riwayat Commit |
 | 20 | `e358542` | 9 Nov 2026 | Minggu 9: catat bukti hot reload dan verifikasi modul DDC `resetStatus()` di lembar kerja |
 | 21 | `1e71cd0` | 9 Nov 2026 | Minggu 9: Bagian L.3 — 3 screenshot bukti sebelum/sesudah perbaikan temuan + verifikasi visual |
+| 22 | `f15186c` | 9 Nov 2026 | Minggu 9: catat commit bukti L.3 di README dan lembar kerja |
 
 Riwayat commit bertahap dari minggu 5 (26 Okt) hingga Minggu 9 (9 Nov), mencakup inisialisasi project, penambahan dokumentasi, perbaikan test, submission UTS, penyempurnaan README, integrasi Firebase Authentication, pengisian tabel uji, dan perbaikan temuan uji teman. Riwayat lengkap dapat dilihat dengan `git log --oneline`.
