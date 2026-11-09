@@ -83,7 +83,7 @@ Modul memakai studi kasus *RoomBook* (reservasi ruangan). Padanan di project kam
 `flutter test` gagal di mesin ini karena `WebSocketException: Invalid WebSocket upgrade request` (masalah environment `flutter_tester`, bukan kode) — catat di refleksi.
 
 **Bukti praktikum yang sudah terkumpul (9 Nov 2026):**
-- `docs/screenshot-auth-users.png` — Authentication > Users, 1 akun `annisa@toko.com`, provider Email/Password, paket Spark $0/month.
+- `docs/screenshot-auth-users.png` — Authentication > Users, **3 akun** (`annisa@toko.com`, `teman1@toko.com`, `teman2@toko.com`), provider Email/Password, Created & Signed In 9 Nov 2026, `1–3 of 3`, paket Spark $0/month. Dua akun `teman*` dibuat lewat Firebase Auth REST API sebagai akun simulasi tambahan (bukan bukti uji teman); semuanya bisa login dengan password simulasi `toko123456` dan bisa dipakai untuk kasus 1.
 - `docs/screenshot-beranda-setelah-login.png` — Beranda tampil otomatis setelah **Daftar**, dengan sapaan "Selamat datang, Annisa Simulasi!" (membuktikan `displayName` tersimpan dan `_AuthGate` berpindah halaman).
 - Keduanya sudah tertempel di `docs/Lembar_Kerja_Minggu9_Annisa_Asti_Indriyani.docx` (Bagian E.5 dan G.2).
 

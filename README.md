@@ -52,7 +52,7 @@ flutter run -d chrome   # atau: flutter run (untuk device lain)
 
 ![Daftar pengguna Firebase Authentication](docs/screenshot-auth-users.png)
 
-*Firebase Console → Authentication → Users: akun simulasi `annisa@toko.com` berhasil terdaftar dengan provider Email/Password pada paket Spark $0/month.*
+*Firebase Console → Authentication → Users: **3 akun** (`annisa@toko.com`, `teman1@toko.com`, `teman2@toko.com`) terdaftar dengan provider Email/Password, Created & Signed In 9 Nov 2026, `1–3 of 3`, pada paket Spark No-cost $0/month.*
 
 ![Beranda setelah daftar akun](docs/screenshot-beranda-setelah-login.png)
 
