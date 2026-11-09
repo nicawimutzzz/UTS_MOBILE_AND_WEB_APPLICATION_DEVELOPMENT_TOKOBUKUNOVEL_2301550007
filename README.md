@@ -58,6 +58,20 @@ flutter run -d chrome   # atau: flutter run (untuk device lain)
 
 *Beranda tampil otomatis setelah menekan **Daftar**, dengan sapaan "Selamat datang, Annisa Simulasi!" yang berasal dari `displayName` Firebase — bukti `_AuthGate` berpindah halaman mengikuti `authStateChanges()`.*
 
+### Bukti perbaikan temuan uji (sebelum / sesudah)
+
+![SEBELUM — kotak merah sisa di halaman Daftar](docs/screenshot-temuan-sebelum.png)
+
+*Screenshot 3 (sebelum perbaikan): halaman Daftar masih memuat kotak merah `Email atau password salah` yang terbawa dari login gagal sebelumnya — inilah temuan uji.*
+
+![Titik awal — halaman Masuk bersih](docs/screenshot-temuan-awal-masuk.png)
+
+*Screenshot 4: titik awal alur uji. Tautan kecil **Belum punya akun? Daftar** berada tepat di bawah tombol **Masuk**.*
+
+![SESUDAH — halaman Daftar bersih](docs/screenshot-temuan-sesudah.png)
+
+*Screenshot 5 (sesudah `resetStatus()` + hot reload): setelah login gagal lalu klik **Daftar**, halaman Daftar bersih tanpa kotak merah sisa. Bukti kualitatif; verifikasi objektif lewat modul DDC ada di Bagian L.2 lembar kerja.*
+
 ## Struktur Project
 
 ```
@@ -98,10 +112,11 @@ lib/
 | Target uji | Chrome (`flutter run -d chrome`) |
 | Verifikasi | `flutter pub get` ✅ · `flutter analyze` **0 error** ✅ · `flutter build web` ✅ |
 | Tabel uji | **8 dari 10 kasus terisi** (kasus 2–9) ✅ — melebihi syarat minimal 5 |
-| Bukti | 2 screenshot di `docs/`: `screenshot-auth-users.png` dan `screenshot-beranda-setelah-login.png` |
-| Uji teman | 1 temuan diperbaiki: pesan error terbawa antar halaman → `resetStatus()` sebelum navigasi Masuk ↔ Daftar |
+| Bukti | 5 screenshot di `docs/`: `screenshot-auth-users.png`, `screenshot-beranda-setelah-login.png`, dan 3 screenshot sebelum/sesudah perbaikan temuan |
+| Uji teman | 1 temuan diperbaiki: pesan error terbawa antar halaman → `resetStatus()` sebelum navigasi Masuk ↔ Daftar; **terverifikasi visual** di Chrome 9 Nov 2026 pukul 20:52 |
+| Hot reload | `Reloaded application in 6,540ms`; modul DDC `login_page.dart.lib.js` & `register_page.dart.lib.js` memuat panggilan `resetStatus()` |
 
-Panduan langkah demi langkah, tabel uji 10 kasus, jawaban refleksi, serta **Bagian L.2 (temuan uji teman dan perbaikannya)** tersedia di `docs/Panduan_Minggu9_Firebase_Login.md` dan `docs/Lembar_Kerja_Minggu9_Annisa_Asti_Indriyani.docx`. Kolom **Hasil nyata** kasus 1 dan 10 serta screenshot **Authentication > Users** diisi/ diverifikasi saat praktikum berjalan; dua screenshot bukti sudah tertanam di lembar kerja DOCX.
+Panduan langkah demi langkah, tabel uji 10 kasus, jawaban refleksi, **Bagian L.2 (temuan uji teman dan perbaikannya)**, serta **Bagian L.3 (bukti visual sebelum/sesudah)** tersedia di `docs/Panduan_Minggu9_Firebase_Login.md` dan `docs/Lembar_Kerja_Minggu9_Annisa_Asti_Indriyani.docx`. Screenshot **Authentication > Users** sudah diverifikasi (3 akun). Yang tersisa hanyalah kolom **Hasil nyata** kasus 1 (login benar) dan kasus 10 (refresh lalu cek data) di Bagian G.1; keduanya boleh diisi saat praktikum berjalan. Lima screenshot bukti sudah tertanam di lembar kerja DOCX.
 
 > Catatan lingkungan: `flutter test` pada mesin ini gagal dengan `WebSocketException: Invalid WebSocket upgrade request` (masalah `flutter_tester`, bukan kode). Pembuktian kompilasi dilakukan melalui `flutter analyze` dan `flutter build web`.
 
@@ -140,5 +155,8 @@ npm run render   # render ke out/uts-tokobukunovel.mp4
 | 15 | `c942d95` | 9 Nov 2026 | Minggu 9: isi hasil nyata kasus 2–4, tabel uji kini 5 kasus terpenuhi |
 | 16 | `42eda55` | 9 Nov 2026 | Minggu 9: perbaiki temuan uji (resetStatus saat navigasi), tabel uji jadi 8 kasus, Bagian L.2 |
 | 17 | `00f40bb` | 9 Nov 2026 | Minggu 9: bukti Authentication > Users diperbarui menjadi 3 akun, caption DOCX/README disamakan |
+| 18 | `c299164` | 9 Nov 2026 | Minggu 9: sinkronisasi bukti commit ke README dan lembar kerja |
+| 19 | `066746d` | 9 Nov 2026 | README: catat commit bukti 3 akun di Riwayat Commit |
+| 20 | `e358542` | 9 Nov 2026 | Minggu 9: catat bukti hot reload dan verifikasi modul DDC `resetStatus()` di lembar kerja |
 
 Riwayat commit bertahap dari minggu 5 (26 Okt) hingga Minggu 9 (9 Nov), mencakup inisialisasi project, penambahan dokumentasi, perbaikan test, submission UTS, penyempurnaan README, integrasi Firebase Authentication, pengisian tabel uji, dan perbaikan temuan uji teman. Riwayat lengkap dapat dilihat dengan `git log --oneline`.

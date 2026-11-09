@@ -150,8 +150,8 @@ Isi kolom **Hasil nyata** setelah menjalankan Langkah 5. **8 dari 10 kasus sudah
 | 3  | Email tidak valid            | `bukan-email`                              | `Format email tidak valid` (validator Form) | ✅ Pesan merah di bawah kolom Email |
 | 4  | Kolom kosong                 | Email & password dikosongkan               | Kedua kolom menampilkan pesan wajib isi     | ✅ Kedua pesan wajib isi muncul |
 | 5  | Daftar dengan email terpakai | Email yang sudah terdaftar                 | `Email sudah terdaftar. Silakan masuk.`     | ✅ Kotak merah sesuai |
-| 6  | Password terlalu pendek      | `123` saat daftar                          | `Kata sandi minimal 6 karakter`             | ✅ Pesan di bawah Kata Sandi (+ temuan, lihat §L) |
-| 7  | Konfirmasi password beda     | Password `toko123456`, ulangi `toko654321` | `Password tidak sama`                       | ✅ Pesan di bawah Konfirmasi (+ temuan, lihat §L) |
+| 6  | Password terlalu pendek      | `123` saat daftar                          | `Kata sandi minimal 6 karakter`             | ✅ Pesan di bawah Kata Sandi (+ temuan, sudah diperbaiki — lihat §L) |
+| 7  | Konfirmasi password beda     | Password `toko123456`, ulangi `toko654321` | `Password tidak sama`                       | ✅ Pesan di bawah Konfirmasi (+ temuan, sudah diperbaiki — lihat §L) |
 | 8  | Refresh setelah login        | Tekan F5 / Ctrl+R di Chrome                | Tetap di Halaman Utama (sesi bertahan)      | ✅ Sesuai — Beranda tetap tampil, sapaan nama masih ada |
 | 9  | Tekan Keluar                 | Ikon logout di AppBar Beranda              | Kembali ke Halaman Masuk                    | ✅ Sesuai — kembali ke halaman Masuk |
 | 10 | Refresh lalu cek data        | Refresh, buka menu Transaksi               | Transaksi baru hilang (masih di memori)     |             |
@@ -248,6 +248,22 @@ git log --oneline -4            # bukti commit bertahap
 | Gejala | Setelah login gagal, halaman **Daftar** masih menampilkan kotak merah `Email atau password salah` padahal belum ada aksi di form daftar (terlihat pada kasus 6 dan 7). Pesan daftar juga berpotensi terbawa kembali ke halaman Masuk. |
 | Penyebab | `AuthProvider.errorMessage` adalah state global; hanya dibersihkan saat `login()` / `register()` dipanggil, bukan saat navigasi. |
 | Perbaikan | `context.read<AuthProvider>().resetStatus()` sebelum `Navigator.push` ke `RegisterPage` (`login_page.dart`) dan sebelum `Navigator.pop` dari halaman Daftar (`register_page.dart`). |
-| Verifikasi | `flutter analyze` **0 error** (79 info lama). Hot reload (`r`) sudah dijalankan 20:12 (`Reloaded application in 6,540ms`); modul DDC di dev server kini memuat panggilan `resetStatus()` di `login_page.dart.lib.js` dan `register_page.dart.lib.js`. Tinggal verifikasi visual: Masuk dengan password salah → Daftar → kembali ke Masuk, kotak merah sisa harus hilang. Memenuhi butir DoD "uji teman + perbaiki satu temuan". |
+| Verifikasi | `flutter analyze` **0 error** (79 info lama). Hot reload (`r`) dijalankan 20:12 (`Reloaded application in 6,540ms`); modul DDC di dev server kini memuat panggilan `resetStatus()` di `login_page.dart.lib.js` dan `register_page.dart.lib.js`. **Verifikasi visual selesai 20:52**: Masuk dengan `annisa@toko.com` / `salah123` → kotak merah muncul → klik tautan kecil `Daftar` → halaman Daftar **bersih, tanpa kotak merah sisa**. Memenuhi butir DoD "uji teman + perbaiki satu temuan". |
 
-Detail lengkap ada di **Bagian L.2** lembar kerja DOCX.
+### Bukti visual sebelum / sesudah
+
+![SEBELUM — kotak merah sisa di halaman Daftar](screenshot-temuan-sebelum.png)
+
+*Screenshot 3 (19:21, sebelum perbaikan): halaman Daftar masih menampilkan `Email atau password salah` dari login gagal sebelumnya — temuan yang diperbaiki.*
+
+![Titik awal — halaman Masuk bersih](screenshot-temuan-awal-masuk.png)
+
+*Screenshot 4: posisi tautan kecil **Belum punya akun? Daftar** tepat di bawah tombol **Masuk**, titik awal alur uji.*
+
+![SESUDAH — halaman Daftar bersih](screenshot-temuan-sesudah.png)
+
+*Screenshot 5 (20:52, sesudah hot reload): setelah login gagal lalu klik **Daftar**, halaman Daftar bersih tanpa kotak merah sisa.*
+
+> **Catatan kejujuran bukti.** Screenshot 5 memotret keadaan akhir halaman Daftar; kotak merah di halaman Masuk sesaat sebelumnya tidak ikut terfoto. Screenshot 3 dan 5 tidak diambil dengan kondisi form identik, jadi keduanya adalah bukti kualitatif, bukan perbandingan piksel. Bukti objektif tambahan ada pada isi modul DDC di baris **Verifikasi** di atas.
+
+Detail lengkap ada di **Bagian L.2** dan **Bagian L.3** lembar kerja DOCX.
