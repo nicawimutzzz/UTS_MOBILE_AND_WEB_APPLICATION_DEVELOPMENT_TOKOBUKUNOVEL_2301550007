@@ -141,7 +141,7 @@ Minta teman mencoba kolom kosong, email salah format, password salah; daftar aku
 
 ## F. Tabel uji login (Latihan 4)
 
-Isi kolom **Hasil nyata** setelah menjalankan Langkah 5.
+Isi kolom **Hasil nyata** setelah menjalankan Langkah 5. **2 dari 10 kasus sudah terisi** (kasus 8 dan 9, diverifikasi 9 Nov 2026) dan sudah disalin ke lembar kerja DOCX.
 
 | #  | Kasus uji                    | Input                                      | Hasil yang diharapkan                       | Hasil nyata |
 | -- | ---------------------------- | ------------------------------------------ | ------------------------------------------- | ----------- |
@@ -152,8 +152,8 @@ Isi kolom **Hasil nyata** setelah menjalankan Langkah 5.
 | 5  | Daftar dengan email terpakai | Email yang sudah terdaftar                 | `Email sudah terdaftar. Silakan masuk.`     |             |
 | 6  | Password terlalu pendek      | `123` saat daftar                          | `Kata sandi minimal 6 karakter`             |             |
 | 7  | Konfirmasi password beda     | Password `toko123456`, ulangi `toko654321` | `Password tidak sama`                       |             |
-| 8  | Refresh setelah login        | Tekan F5 di Chrome                         | Tetap di Halaman Utama (sesi bertahan)      |             |
-| 9  | Tekan Keluar                 | Ikon logout di AppBar Beranda              | Kembali ke Halaman Masuk                    |             |
+| 8  | Refresh setelah login        | Tekan F5 / Ctrl+R di Chrome                | Tetap di Halaman Utama (sesi bertahan)      | ✅ Sesuai — Beranda tetap tampil, sapaan nama masih ada |
+| 9  | Tekan Keluar                 | Ikon logout di AppBar Beranda              | Kembali ke Halaman Masuk                    | ✅ Sesuai — kembali ke halaman Masuk |
 | 10 | Refresh lalu cek data        | Refresh, buka menu Transaksi               | Transaksi baru hilang (masih di memori)     |             |
 
 > Kasus 10 adalah **jembatan ke Minggu 10**: sesi login bertahan, data buku/transaksi belum.
@@ -179,11 +179,11 @@ Isi kolom **Hasil nyata** setelah menjalankan Langkah 5.
 | Butir                                                | Ya/Belum                                                                                                                      |
 | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | Project Firebase Spark terhubung, tanpa billing      | ☑ Screenshot Console, Spark $0/month                                                                                            |
-| Daftar, masuk, dan keluar berjalan di Chrome         | Sebagian: **daftar ✅**, masuk & keluar menyusul (kasus 1 & 9)                                                                 |
-| Halaman utama hanya terbuka setelah login            | ☑ Halaman Masuk tampil lebih dulu, lalu Beranda otomatis                                                                         |
-| Sesi bertahan setelah refresh                        | ☐ Kasus 8                                                                                                                      |
+| Daftar, masuk, dan keluar berjalan di Chrome         | Sebagian: **daftar ✅** dan **keluar ✅** (kasus 9); masuk menyusul (kasus 1)                                                |
+| Halaman utama hanya terbuka setelah login            | ☑ Halaman Masuk tampil lebih dulu, lalu Beranda otomatis, lalu Keluar kembali ke Masuk                                         |
+| Sesi bertahan setelah refresh                        | ☑ **Kasus 8** — Beranda tetap tampil setelah Ctrl+R, sapaan nama masih ada                                                    |
 | Kesalahan login tampil sebagai pesan yang jelas      | ☐ Kasus 2–7                                                                                                                    |
-| Tabel uji login ≥ 5 kasus terisi                     | ☐ 10 kasus disiapkan, kolom Hasil nyata menyusul                                                                                |
+| Tabel uji login ≥ 5 kasus terisi                     | Sebagian: **2 dari 10 kasus** terisi (8 & 9), sudah ditulis di lembar kerja DOCX                                              |
 | Screenshot daftar pengguna di Authentication > Users | ☑ `docs/screenshot-auth-users.png` — tertempel di lembar kerja                                                                   |
 | ≥ 2 commit baru ter-push                             | ☑ **≥ 4 commit** (`d2349ab`, `5ffd89c`, `18a8812`, `5732dc7`, dst.) — lihat `git log --oneline`                              |
 
