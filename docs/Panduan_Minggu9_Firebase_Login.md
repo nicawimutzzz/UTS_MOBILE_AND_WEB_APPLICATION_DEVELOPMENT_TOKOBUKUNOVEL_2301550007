@@ -141,14 +141,14 @@ Minta teman mencoba kolom kosong, email salah format, password salah; daftar aku
 
 ## F. Tabel uji login (Latihan 4)
 
-Isi kolom **Hasil nyata** setelah menjalankan Langkah 5. **2 dari 10 kasus sudah terisi** (kasus 8 dan 9, diverifikasi 9 Nov 2026) dan sudah disalin ke lembar kerja DOCX.
+Isi kolom **Hasil nyata** setelah menjalankan Langkah 5. **5 dari 10 kasus sudah terisi** (kasus 2, 3, 4, 8, 9 — diverifikasi 9 Nov 2026) dan sudah disalin ke lembar kerja DOCX. **Syarat modul "tabel uji ≥ 5 kasus" sudah terpenuhi.**
 
 | #  | Kasus uji                    | Input                                      | Hasil yang diharapkan                       | Hasil nyata |
 | -- | ---------------------------- | ------------------------------------------ | ------------------------------------------- | ----------- |
 | 1  | Login benar                  | Akun simulasi yang sudah dibuat            | Halaman Utama (Beranda) tampil              |             |
-| 2  | Password salah               | Email benar + password `salah123`          | `Email atau password salah`                 |             |
-| 3  | Email tidak valid            | `bukan-email`                              | `Format email tidak valid` (validator Form) |             |
-| 4  | Kolom kosong                 | Email & password dikosongkan               | Kedua kolom menampilkan pesan wajib isi     |             |
+| 2  | Password salah               | Email benar + password `salah123`          | `Email atau password salah`                 | ✅ Kotak merah "Email atau password salah" |
+| 3  | Email tidak valid            | `bukan-email`                              | `Format email tidak valid` (validator Form) | ✅ Pesan merah di bawah kolom Email |
+| 4  | Kolom kosong                 | Email & password dikosongkan               | Kedua kolom menampilkan pesan wajib isi     | ✅ Kedua pesan wajib isi muncul |
 | 5  | Daftar dengan email terpakai | Email yang sudah terdaftar                 | `Email sudah terdaftar. Silakan masuk.`     |             |
 | 6  | Password terlalu pendek      | `123` saat daftar                          | `Kata sandi minimal 6 karakter`             |             |
 | 7  | Konfirmasi password beda     | Password `toko123456`, ulangi `toko654321` | `Password tidak sama`                       |             |
@@ -182,8 +182,8 @@ Isi kolom **Hasil nyata** setelah menjalankan Langkah 5. **2 dari 10 kasus sudah
 | Daftar, masuk, dan keluar berjalan di Chrome         | Sebagian: **daftar ✅** dan **keluar ✅** (kasus 9); masuk menyusul (kasus 1)                                                |
 | Halaman utama hanya terbuka setelah login            | ☑ Halaman Masuk tampil lebih dulu, lalu Beranda otomatis, lalu Keluar kembali ke Masuk                                         |
 | Sesi bertahan setelah refresh                        | ☑ **Kasus 8** — Beranda tetap tampil setelah Ctrl+R, sapaan nama masih ada                                                    |
-| Kesalahan login tampil sebagai pesan yang jelas      | ☐ Kasus 2–7                                                                                                                    |
-| Tabel uji login ≥ 5 kasus terisi                     | Sebagian: **2 dari 10 kasus** terisi (8 & 9), sudah ditulis di lembar kerja DOCX                                              |
+| Kesalahan login tampil sebagai pesan yang jelas      | ☑ Kasus 2, 3, 4 teruji; kasus 5–7 menyusul                                                                                   |
+| Tabel uji login ≥ 5 kasus terisi                     | ☑ **5 dari 10 kasus** — syarat minimal 5 sudah terpenuhi, tertulis di lembar kerja DOCX                                      |
 | Screenshot daftar pengguna di Authentication > Users | ☑ `docs/screenshot-auth-users.png` — tertempel di lembar kerja                                                                   |
 | ≥ 2 commit baru ter-push                             | ☑ **≥ 4 commit** (`d2349ab`, `5ffd89c`, `18a8812`, `5732dc7`, dst.) — lihat `git log --oneline`                              |
 
