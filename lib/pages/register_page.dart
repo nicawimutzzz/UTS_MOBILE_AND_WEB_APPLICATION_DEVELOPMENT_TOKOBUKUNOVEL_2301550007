@@ -140,7 +140,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 16),
                 TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    // Minggu 9 — perbaikan temuan uji: pesan error daftar
+                    // jangan terbawa kembali ke halaman Masuk.
+                    context.read<AuthProvider>().resetStatus();
+                    Navigator.pop(context);
+                  },
                   child: Text(
                     'Sudah punya akun? Masuk',
                     style: TextStyle(color: AppColors.primary),

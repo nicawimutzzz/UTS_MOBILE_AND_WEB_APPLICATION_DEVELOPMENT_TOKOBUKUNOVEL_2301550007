@@ -97,8 +97,11 @@ lib/
 | Pesan kesalahan | `lib/utils/auth_errors.dart` — 8 kode `FirebaseAuthException` diterjemahkan ke bahasa pengguna |
 | Target uji | Chrome (`flutter run -d chrome`) |
 | Verifikasi | `flutter pub get` ✅ · `flutter analyze` **0 error** ✅ · `flutter build web` ✅ |
+| Tabel uji | **8 dari 10 kasus terisi** (kasus 2–9) ✅ — melebihi syarat minimal 5 |
+| Bukti | 2 screenshot di `docs/`: `screenshot-auth-users.png` dan `screenshot-beranda-setelah-login.png` |
+| Uji teman | 1 temuan diperbaiki: pesan error terbawa antar halaman → `resetStatus()` sebelum navigasi Masuk ↔ Daftar |
 
-Panduan langkah demi langkah, tabel uji 10 kasus, dan jawaban refleksi tersedia di `docs/Panduan_Minggu9_Firebase_Login.md` dan lembar kerja DOCX. Kolom **Hasil nyata** serta screenshot **Authentication > Users** diisi saat praktikum setelah akun simulasi dibuat.
+Panduan langkah demi langkah, tabel uji 10 kasus, jawaban refleksi, serta **Bagian L.2 (temuan uji teman dan perbaikannya)** tersedia di `docs/Panduan_Minggu9_Firebase_Login.md` dan `docs/Lembar_Kerja_Minggu9_Annisa_Asti_Indriyani.docx`. Kolom **Hasil nyata** kasus 1 dan 10 serta screenshot **Authentication > Users** diisi/ diverifikasi saat praktikum berjalan; dua screenshot bukti sudah tertanam di lembar kerja DOCX.
 
 > Catatan lingkungan: `flutter test` pada mesin ini gagal dengan `WebSocketException: Invalid WebSocket upgrade request` (masalah `flutter_tester`, bukan kode). Pembuktian kompilasi dilakukan melalui `flutter analyze` dan `flutter build web`.
 
@@ -130,5 +133,10 @@ npm run render   # render ke out/uts-tokobukunovel.mp4
 | 8 | `9b3f13d` | 9 Nov 2026 | README: lengkapi tabel Riwayat Commit dengan commit ke-7 |
 | 9 | `d2349ab` | 9 Nov 2026 | Minggu 9 (Latihan 1): Hubungkan project ke Firebase |
 | 10 | `5ffd89c` | 9 Nov 2026 | Minggu 9 (Latihan 2–4): login Firebase, auth gate, pesan kesalahan, panduan + lembar kerja |
+| 11 | `18a8812` | 9 Nov 2026 | README: status Minggu 9 (Firebase Auth), dokumen, dan riwayat commit |
+| 12 | `5732dc7` | 9 Nov 2026 | Minggu 9: lengkapi lembar kerja dengan hash commit aktual |
+| 13 | `1deb073` | 9 Nov 2026 | Minggu 9: tambah 2 screenshot bukti dan tempelkan ke lembar kerja |
+| 14 | `81277a6` | 9 Nov 2026 | Minggu 9: isi hasil nyata kasus 8 (refresh) dan 9 (keluar) |
+| 15 | `c942d95` | 9 Nov 2026 | Minggu 9: isi hasil nyata kasus 2–4, tabel uji kini 5 kasus terpenuhi |
 
-Riwayat commit bertahap dari minggu 5 (26 Okt) hingga Minggu 9 (9 Nov), mencakup inisialisasi project, penambahan dokumentasi, perbaikan test, submission UTS, penyempurnaan README, dan integrasi Firebase Authentication. Riwayat lengkap dapat dilihat dengan `git log --oneline`.
+Riwayat commit bertahap dari minggu 5 (26 Okt) hingga Minggu 9 (9 Nov), mencakup inisialisasi project, penambahan dokumentasi, perbaikan test, submission UTS, penyempurnaan README, integrasi Firebase Authentication, pengisian tabel uji, dan perbaikan temuan uji teman. Riwayat lengkap dapat dilihat dengan `git log --oneline`.

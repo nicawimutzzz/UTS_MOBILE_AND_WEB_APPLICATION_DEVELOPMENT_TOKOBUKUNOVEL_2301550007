@@ -165,6 +165,9 @@ class _LoginPageState extends State<LoginPage> {
                           Text('Belum punya akun? ', style: AppTextStyles.bodySecondary),
                           TextButton(
                         onPressed: () {
+                          // Minggu 9 — perbaikan temuan uji: pesan error login
+                          // jangan terbawa ke halaman Daftar.
+                          context.read<AuthProvider>().resetStatus();
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (_) => const RegisterPage()),
