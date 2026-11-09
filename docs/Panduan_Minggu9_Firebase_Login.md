@@ -248,6 +248,6 @@ git log --oneline -4            # bukti commit bertahap
 | Gejala | Setelah login gagal, halaman **Daftar** masih menampilkan kotak merah `Email atau password salah` padahal belum ada aksi di form daftar (terlihat pada kasus 6 dan 7). Pesan daftar juga berpotensi terbawa kembali ke halaman Masuk. |
 | Penyebab | `AuthProvider.errorMessage` adalah state global; hanya dibersihkan saat `login()` / `register()` dipanggil, bukan saat navigasi. |
 | Perbaikan | `context.read<AuthProvider>().resetStatus()` sebelum `Navigator.push` ke `RegisterPage` (`login_page.dart`) dan sebelum `Navigator.pop` dari halaman Daftar (`register_page.dart`). |
-| Verifikasi | `flutter analyze` **0 error** (79 info lama). Langkah lanjutan: hot reload (`r`) lalu ulangi alur Masuk → Daftar → Masuk untuk memastikan kotak merah sisa hilang. Memenuhi butir DoD "uji teman + perbaiki satu temuan". |
+| Verifikasi | `flutter analyze` **0 error** (79 info lama). Hot reload (`r`) sudah dijalankan 20:12 (`Reloaded application in 6,540ms`); modul DDC di dev server kini memuat panggilan `resetStatus()` di `login_page.dart.lib.js` dan `register_page.dart.lib.js`. Tinggal verifikasi visual: Masuk dengan password salah → Daftar → kembali ke Masuk, kotak merah sisa harus hilang. Memenuhi butir DoD "uji teman + perbaiki satu temuan". |
 
 Detail lengkap ada di **Bagian L.2** lembar kerja DOCX.
