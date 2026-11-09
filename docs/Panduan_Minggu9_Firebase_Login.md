@@ -170,7 +170,7 @@ Isi kolom **Hasil nyata** setelah menjalankan Langkah 5.
 | Kesalahan login tampil sebagai pesan yang jelas | ☐ |
 | Tabel uji login ≥ 5 kasus terisi | ☐ |
 | Screenshot daftar pengguna di Authentication > Users | ☐ |
-| ≥ 2 commit baru ter-push | ☑ (commit `d2349ab` + commit Latihan 2–4) |
+| ≥ 2 commit baru ter-push | ☑ **3 commit**: `d2349ab` (Latihan 1), `5ffd89c` (Latihan 2–4 + dokumen), `18a8812` (README) — sudah di-push ke `origin/main` |
 
 ---
 
