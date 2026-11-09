@@ -139,5 +139,6 @@ npm run render   # render ke out/uts-tokobukunovel.mp4
 | 14 | `81277a6` | 9 Nov 2026 | Minggu 9: isi hasil nyata kasus 8 (refresh) dan 9 (keluar) |
 | 15 | `c942d95` | 9 Nov 2026 | Minggu 9: isi hasil nyata kasus 2–4, tabel uji kini 5 kasus terpenuhi |
 | 16 | `42eda55` | 9 Nov 2026 | Minggu 9: perbaiki temuan uji (resetStatus saat navigasi), tabel uji jadi 8 kasus, Bagian L.2 |
+| 17 | `00f40bb` | 9 Nov 2026 | Minggu 9: bukti Authentication > Users diperbarui menjadi 3 akun, caption DOCX/README disamakan |
 
 Riwayat commit bertahap dari minggu 5 (26 Okt) hingga Minggu 9 (9 Nov), mencakup inisialisasi project, penambahan dokumentasi, perbaikan test, submission UTS, penyempurnaan README, integrasi Firebase Authentication, pengisian tabel uji, dan perbaikan temuan uji teman. Riwayat lengkap dapat dilihat dengan `git log --oneline`.
