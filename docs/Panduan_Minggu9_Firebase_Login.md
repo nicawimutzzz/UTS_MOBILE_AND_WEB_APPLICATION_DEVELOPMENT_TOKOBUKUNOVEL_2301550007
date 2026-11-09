@@ -185,7 +185,7 @@ Isi kolom **Hasil nyata** setelah menjalankan Langkah 5. **8 dari 10 kasus sudah
 | Kesalahan login tampil sebagai pesan yang jelas      | ☑ Seluruh kasus 2–7 teruji, pesan sesuai yang diharapkan                                                                   |
 | Tabel uji login ≥ 5 kasus terisi                     | ☑ **8 dari 10 kasus** — jauh melebihi syarat minimal 5, tertulis di lembar kerja DOCX                                      |
 | Screenshot daftar pengguna di Authentication > Users | ☑ `docs/screenshot-auth-users.png` — tertempel di lembar kerja                                                                   |
-| ≥ 2 commit baru ter-push                             | ☑ **≥ 4 commit** (`d2349ab`, `5ffd89c`, `18a8812`, `5732dc7`, dst.) — lihat `git log --oneline`                              |
+| ≥ 2 commit baru ter-push                             | ☑ **8 commit khusus Minggu 9** (`d2349ab` … `42eda55`) — lihat Bagian L lembar kerja dan `git log --oneline`                  |
 
 ---
 
